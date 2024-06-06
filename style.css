@@ -1,0 +1,50 @@
+body
+{
+	background-color: #000000;
+	color: #ffffff;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+div#sidebar
+{
+	height: 100%;
+	width: 0;
+	padding-top: 60px;
+	
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	
+	background-color: #180425;
+	overflow-x: hidden;
+	transition: 0.3s;
+	white-space: nowrap;
+}
+
+div#sidebar a
+{
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #777777;
+	display: block;
+	transition: 0.3s;
+}
+
+div#sidebar a:hover
+{
+	color: #f1f1f1;
+}
+
+div#sidebar .closebutton
+{
+	position: absolute;
+	top: 0;
+	font-size: 25px;
+}
+
+span
+{
+	font-size: 25px;
+}
