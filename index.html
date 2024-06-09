@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 
-<head>
-	<link rel="stylesheet" href="style.css">
-</head>
+<html>
+	<head>
+		<link href="style.css" rel="stylesheet">
+	</head>
 
-<body>
-	<h1 style="text-align: center;">Terraria Tools</h1>
-	<h2><a href="src/aether/index.html">Aether Finder</a></h2>
-</body>
+	<body>
+		<script src="./sidebar.js"></script>
 
-<footer>
-	Created by Gabriel Sorienni<br/>
-	<a href="https://github.com/GabrielSorienni/Terraria-Tools">GitHub</a>
-</footer>
+		<div id="sidebar">
+			<a href="javascript:void(0)" class="closebutton" onclick="closeSidebar()">Close</a>
+			<a href="./Fishing/fishing.html">Fishing</a>
+		</div>
+
+		<span onclick="openSidebar()">Terraria Tools</span>
+
+		<div style="padding-top: 25px;">
+			<h3>Planned features</h3>
+			<ul>
+				<li>Aether Finder;</li>
+				<li>NPC Calculator;</li>
+				<li>Fishing Calculator.</li>
+			</ul>
+		</div>
+	</body>
+</html>
