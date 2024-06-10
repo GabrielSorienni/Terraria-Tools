@@ -31,16 +31,18 @@ var fast_lava_text = document.getElementById("fast_lava_text");
 
 var fishing_power = document.getElementById("fishing_power");
 // #endregion Document elements
+
+var fishing_power_cache = 0;
+
 // #region Functions
 /**
  * Calculates the catch rate down to 2 decimal points.
- * @param {number} fishing_power The player's total fishing power after all factors have been accounted for.
  * @returns {number} Catch rate in seconds per bite.
  * @see {@link https://terraria.wiki.gg/wiki/Fishing#Catch_frequency}
  */
-function calcCatchRate(fishing_power)
+function calcCatchRate()
 {
-	var catch_rate = 11/(23 * fishing_power / 600 + 2.5);
+	var catch_rate = 11/(23 * fishing_power_cache / 600 + 2.5);
 	return (Math.trunc(catch_rate * 100) / 100);
 }
 
@@ -157,7 +159,9 @@ function calcFishingPower()
 
 	total += getChumBucketFactor();
 
-	return Math.trunc(total);
+	fishing_power_cache = Math.round(total);
+
+	return fishing_power_cache;
 }
 
 function updateFishingPowerText()
@@ -203,14 +207,10 @@ function updateLavaAccessoryCheckbox()
 	{
 		lava_hook.checked = true;
 		lava_hook.disabled = true;
-		tooltip = "Whether you have an accessory that allows fishing in lava without lava bait.\nThis is automatically checked due to the Lavaproof Tackle Bag being checked."
 	}
 	else
 	{
 		lava_hook.disabled = false;
-		tooltip = "Whether you have an accessory that allows fishing in lava without lava bait."
 	}
-	
-	lava_hook.setAttribute("title", tooltip);
 }
 // #endregion Functions
