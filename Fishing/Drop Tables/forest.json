@@ -1,0 +1,105 @@
+{
+	"corrupt_behavior": "supersede",
+
+	"drop_table":
+	{
+		"fish":
+		{
+			"plentiful":
+			[
+
+			],
+
+			"common":
+			[
+
+			],
+
+			"uncommon":
+			[
+
+			],
+
+			"rare":
+			[
+
+			],
+
+			"very_rare":
+			[
+
+			],
+
+			"legendary":
+			[
+
+			]
+		},
+
+		"crate":
+		{
+			"plentiful":
+			[
+
+			],
+
+			"common":
+			[
+
+			],
+
+			"uncommon":
+			[
+
+			],
+
+			"rare":
+			[
+
+			],
+
+			"very_rare":
+			[
+
+			],
+
+			"legendary":
+			[
+
+			]
+		},
+
+		"other":
+		{
+			"plentiful":
+			[
+
+			],
+
+			"common":
+			[
+
+			],
+
+			"uncommon":
+			[
+
+			],
+
+			"rare":
+			[
+
+			],
+
+			"very_rare":
+			[
+
+			],
+
+			"legendary":
+			[
+
+			]
+		}
+	}
+}
