@@ -1,0 +1,92 @@
+{
+	"corrupt_behavior": "unaffected",
+	"has_quests": false,
+
+	"drop_table":
+	{
+		"fish":
+		{
+			"plentiful": [],
+			"common": [],
+			"uncommon": [],
+			"legendary": [],
+
+			"rare":
+			[
+				"Obsidifish"
+			],
+
+			"very_rare":
+			[
+				"Flarefin Koi"
+			]
+		},
+
+		"crate":
+		{
+			"pre_hardmode":
+			{
+				"common": [],
+				"uncommon": [],
+				"rare": [],
+				"very_rare": [],
+				"legendary": [],
+
+				"plentiful":
+				[
+					"Obsidian Crate"
+				]
+			},
+
+			"hardmode":
+			{
+				"common": [],
+				"rare": [],
+				"uncommon": [],
+				"very_rare": [],
+				"legendary": [],
+				
+				"plentiful":
+				[
+					"Hellstone Crate"
+				]
+			}
+		},
+
+		"other":
+		{
+			"pre_hardmode":
+			{
+				"plentiful": [],
+				"common": [],
+				"rare": [],
+				"very_rare": [],
+
+				"uncommon":
+				[
+					"Bomb Fish"
+				],
+
+				"legendary":
+				[
+					"Bottomless Lava Bucket",
+					"Lava Absorbant Sponge",
+					"Demon Conch"
+				]
+			},
+
+			"hardmode":
+			{
+				"plentiful": [],
+				"common": [],
+				"uncommon": [],
+				"rare": [],
+				"very_rare": [],
+				"legendary":
+				[
+					"Obsidian Swordfish"
+				]
+			}
+		}
+	}
+}

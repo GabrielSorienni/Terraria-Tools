@@ -1,0 +1,71 @@
+{
+	"corrupt_behavior": "unaffected",
+	"has_quests": true,
+
+	"drop_table":
+	{
+		"fish":
+		{
+			"plentiful": [],
+			"common": [],
+			"very_rare": [],
+			"legendary": [],
+			
+			"uncommon":
+			[
+				"Honeyfin"
+			],
+			
+			"rare":
+			[
+				"Honeyfin"
+			]
+		},
+
+		"crate":
+		{
+			"pre_hardmode":
+			{
+				"plentiful": [],
+				"common": [],
+				"uncommon": [],
+				"rare": [],
+				"very_rare": [],
+				"legendary": []
+			},
+
+			"hardmode":
+			{
+				"plentiful": [],
+				"common": [],
+				"uncommon": [],
+				"rare": [],
+				"very_rare": [],
+				"legendary": []
+			}
+		},
+
+		"other":
+		{
+			"pre_hardmode":
+			{
+				"plentiful": [],
+				"common": [],
+				"uncommon": [],
+				"rare": [],
+				"very_rare": [],
+				"legendary": []
+			},
+
+			"hardmode":
+			{
+				"plentiful": [],
+				"common": [],
+				"uncommon": [],
+				"rare": [],
+				"very_rare": [],
+				"legendary": []
+			}
+		}
+	}
+}

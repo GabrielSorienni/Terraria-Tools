@@ -1,105 +1,109 @@
 {
-	"corrupt_behavior": "supersede",
+	"corrupt_behavior": "superseded",
+	"has_quests": true,
 
 	"drop_table":
 	{
 		"fish":
 		{
+			"common": [],
+			"uncommon": [],
+			"rare": [],
+			"very_rare": [],
+			"legendary": [],
+
 			"plentiful":
 			[
-
-			],
-
-			"common":
-			[
-
-			],
-
-			"uncommon":
-			[
-
-			],
-
-			"rare":
-			[
-
-			],
-
-			"very_rare":
-			[
-
-			],
-
-			"legendary":
-			[
-
+				"Bass"
 			]
 		},
 
 		"crate":
 		{
-			"plentiful":
-			[
+			"pre_hardmode":
+			{
+				"common": [],
+				"rare": [],
 
-			],
+				"plentiful":
+				[
+					"Wooden Crate"
+				],
+	
+				"uncommon":
+				[
+					"Iron Crate"
+				],
+	
+				"very_rare":
+				[
+					"Golden Crate"
+				],
+	
+				"legendary":
+				[
+					"Golden Crate"
+				]
+			},
 
-			"common":
-			[
-
-			],
-
-			"uncommon":
-			[
-
-			],
-
-			"rare":
-			[
-
-			],
-
-			"very_rare":
-			[
-
-			],
-
-			"legendary":
-			[
-
-			]
+			"hardmode":
+			{
+				"common": [],
+				"rare": [],
+				
+				"plentiful":
+				[
+					"Pearlwood Crate"
+				],
+	
+				"uncommon":
+				[
+					"Mythril Crate"
+				],
+	
+				"very_rare":
+				[
+					"Titanium Crate"
+				],
+	
+				"legendary":
+				[
+					"Titanium Crate"
+				]
+			}
 		},
 
 		"other":
 		{
-			"plentiful":
-			[
+			"pre_hardmode":
+			{
+				"plentiful": [],
+				"common": [],
+				"rare": [],
+				"very_rare": [],
 
-			],
+				"uncommon":
+				[
+					"Bomb Fish"
+				],
 
-			"common":
-			[
+				"legendary":
+				[
+					"Frog Leg",
+					"Balloon Pufferfish",
+					"Zephyr Fish"
+				]
+			},
 
-			],
-
-			"uncommon":
-			[
-
-			],
-
-			"rare":
-			[
-
-			],
-
-			"very_rare":
-			[
-
-			],
-
-			"legendary":
-			[
-
-			]
+			"hardmode":
+			{
+				"plentiful": [],
+				"common": [],
+				"uncommon": [],
+				"rare": [],
+				"very_rare": [],
+				"legendary": []
+			}
 		}
 	}
 }
