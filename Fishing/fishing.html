@@ -7,172 +7,305 @@
 	</head>
 	
 	<body>
+		<script src="../fishing.js" type="module"></script>
+
 		<div id="sidebar">
 			<a href="javascript:void(0)" class="closebutton" onclick="closeSidebar()">&lAarr;</a>
+			<a href="../index.html">Home</a>
 		</div>
 		
 		<span onclick="openSidebar()">&rAarr; Terraria Tools</span>
 
 		<div style="padding-top: 25px;">
-			See the <a href="https://terraria.wiki.gg/wiki/Fishing">wiki</a> for more information.
+			See the <a href="https://terraria.wiki.gg/wiki/Fishing">wiki</a> for more information.<br>
+			<b>Bold</b> values indicate a <i>cap</i> (i.e.: the value will not be changed with additional Fishing Power).
 		</div>
 
-		<div style="padding-top: 25px; width: 25%; float: left">
-			<fieldset>
-				<legend>Lake</legend>
-				<div>
-					<label for="liquid">Liquid:</label>
-					<select id="liquid" onchange="updateFishingPowerText()" required>
-						<option selected value="water">Water</option>
-						<option value="lava">Lava</option>
-						<option value="honey">Honey</option>
-					</select>
-				</div>
-				<div>
-					<label for="lake_size">Size:</label>
-					<input id="lake_size" type="number" min="0" value="300" onchange="updateFishingPowerText()">
-				</div>
-			</fieldset>
-			
-			<fieldset>
-				<legend>Equipment</legend>
-				<div>
-					<label for="rod_power" style="padding-right: 1ch;">Rod power:</label>
-					<input type="number" id="rod_power" min="0" value="5" onchange="updateFishingPowerText()">
-				</div>
-				<div>
-					<label for="bait_power">Bait power:</label>
-					<input type="number" id="bait_power" min="0" value="5" onchange="updateFishingPowerText()">
-				</div>
-				<div>
-					<label for="chum_bucket">Chum Buckets: </label>
-					<select id="chum_bucket" onchange="updateFishingPowerText()" required>
-						<option selected>0</option>
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-					</select>
-				</div>
-				<div>
-					<fieldset>
-						<legend>Angler Armor</legend>
-						<div>
-							<input type="checkbox" id="angler_hat" onchange="updateFishingPowerText()">
-							<label for="angler_hat">Angler Hat</label>
-						</div>
-						<div>
-							<input type="checkbox" id="angler_vest" onchange="updateFishingPowerText()">
-							<label for="angler_vest">Angler Vest</label>
-						</div>
-						<div>
-							<input type="checkbox" id="angler_pants" onchange="updateFishingPowerText()">
-							<label for="angler_pants">Angler Pants</label>
-						</div>
-					</fieldset>
-				</div>
-				<div>
-					<input type="checkbox" id="angler_earring" onchange="updateFishingPowerText()">
-					<label for="angler_earring">Angler Earring</label>
-				</div>
-				<div>
-					<input type="checkbox" id="angler_tackle_bag" onchange="updateFishingPowerText()">
-					<label for="angler_tackle_bag">Angler Tackle Bag</label>
-				</div>
-				<div>
-					<input type="checkbox" id="lavaproof_tackle_bag" onchange="updateFishingPowerText(); updateLavaAccessoryCheckbox()">
-					<label for="lavaproof_tackle_bag">Lavaproof Tackle Bag</label>
-				</div>
-				<div>
-					<input type="checkbox" id="fishing_bobber" onchange="updateFishingPowerText()">
-					<label for="fishing_bobber">Fishing Bobber</label>
-				</div>
-				<div>
-					<input type="checkbox" id="inner_tube" onchange="updateFishingPowerText()">
-					<label for="inner_tube">Inner Tube</label>
-				</div>
-			</fieldset>
+		<div id="flexbox">
+			<div> <!-- User input -->
+				<fieldset> <!-- Lake -->
+					<legend>Lake</legend>
+					<div>
+						<label for="liquid">Liquid:</label>
+						<select id="liquid" onchange="updateAllText(); updateBloodMoonTable(); updateDropTable()" required>
+							<option selected value="water">Water</option>
+							<option value="lava">Lava</option>
+							<option value="honey">Honey</option>
+						</select>
+					</div>
+					<div>
+						<label for="lake_size">Volume:</label>
+						<input id="lake_size" type="number" min="0" value="300" onchange="updateAllText()">
+					</div>
+				</fieldset>
+				
+				<fieldset> <!-- Equipment -->
+					<legend>Equipment</legend>
+					<div>
+						<label for="rod_power" style="padding-right: 1ch;">Rod power:</label>
+						<input type="number" id="rod_power" min="0" value="5" onchange="updateAllText()">
+					</div>
+					<div>
+						<label for="bait_power">Bait power:</label>
+						<input type="number" id="bait_power" min="0" value="5" onchange="updateAllText()">
+					</div>
+					<div>
+						<label for="chum_bucket">Chum Buckets: </label>
+						<select id="chum_bucket" onchange="updateAllText()" required>
+							<option selected>0</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+						</select>
+					</div>
+					<div>
+						<fieldset>
+							<legend>Angler Armor</legend>
+							<div>
+								<input type="checkbox" id="angler_hat" onchange="updateAllText()">
+								<label for="angler_hat">Angler Hat</label>
+							</div>
+							<div>
+								<input type="checkbox" id="angler_vest" onchange="updateAllText()">
+								<label for="angler_vest">Angler Vest</label>
+							</div>
+							<div>
+								<input type="checkbox" id="angler_pants" onchange="updateAllText()">
+								<label for="angler_pants">Angler Pants</label>
+							</div>
+						</fieldset>
+					</div>
+					<div style="padding-top: 5pt;">
+						<input type="checkbox" id="angler_earring" onchange="updateAllText()">
+						<label for="angler_earring">Angler Earring</label>
+					</div>
+					<div>
+						<input type="checkbox" id="angler_tackle_bag" onchange="updateAllText()">
+						<label for="angler_tackle_bag">Angler Tackle Bag</label>
+					</div>
+					<div>
+						<input type="checkbox" id="lavaproof_tackle_bag" onchange="updateLavaAccessoryCheckbox(); updateAllText()">
+						<label for="lavaproof_tackle_bag">Lavaproof Tackle Bag</label>
+					</div>
+					<div>
+						<input type="checkbox" id="fishing_bobber" onchange="updateAllText()">
+						<label for="fishing_bobber">Fishing Bobber</label>
+					</div>
+					<div>
+						<input type="checkbox" id="inner_tube" onchange="updateAllText()">
+						<label for="inner_tube">Inner Tube</label>
+					</div>
+				</fieldset>
 
-			<fieldset>
-				<legend>Buffs</legend>
-				<div>
-					<input type="checkbox" id="fishing_potion" onchange="updateFishingPowerText()">
-					<label for="fishing_potion">Fishing Potion</label>
-				</div>
-				<div>
-					<input type="checkbox" id="tipsy" onchange="updateFishingPowerText()">
-					<label for="tipsy">Tipsy</label>
-				</div>
-				<div>
-					<input type="checkbox" id="gummy_worm" onchange="updateFishingPowerText()">
-					<label for="gummy_worm">Gummy Worm</label>
-				</div>
-				<div>
-					<input type="checkbox" id="toilet" onchange="updateFishingPowerText()">
-					<label for="toilet">Sitting on Toilet</label>
-				</div>
-			</fieldset>
-			
-			<fieldset>
-				<legend>Environment</legend>
-				<div>
-					<label for="moon_phase">Moon Phase: </label>
-					<select id="moon_phase" onchange="updateFishingPowerText()" required>
-						<option value="full" selected>Full/Blood Moon</option>
-						<option value="gibbous">Waning Gibbous</option>
-						<option value="quarter">Third Quarter</option>
-						<option value="crescent">Waning Crescent</option>
-						<option value="new">New Moon</option>
-						<option value="crescent">Waxing Crescent</option>
-						<option value="quarter">First Quarter</option>
-						<option value="gibbous">Waxing Gibbous</option>
-					</select>
-				</div>
-				<div>
-					<label for="daytime">Time of day: </label>
-					<select id="daytime" onchange="updateFishingPowerText()" required>
-						<option value="neutral" selected>N/A</option>
-						<option value="positive">4:30 AM - 6:00 AM</option>
-						<option value="negative">9:00 AM - 3:00 PM</option>
-						<option value="positive">6:00 PM - 7:30 PM</option>
-						<option value="negative">9:18 PM - 2:42 AM</option>
-					</select>
-				</div>
-				<div>
-					<input type="checkbox" id="cloudy" onchange="updateFishingPowerText()">
-					<label for="cloudy">Cloudy or Overcast</label>
-				</div>
-				<div>
-					<input type="checkbox" id="rainy" onchange="updateFishingPowerText()">
-					<label for="rainy">Rain</label>
-				</div>
-			</fieldset>
+				<fieldset> <!-- Buffs -->
+					<legend>Buffs</legend>
+					<div>
+						<input type="checkbox" id="fishing_potion" onchange="updateAllText()">
+						<label for="fishing_potion">Fishing Potion</label>
+					</div>
+					<div>
+						<input type="checkbox" id="crate_potion" onchange="updateAllText()">
+						<label for="crate_potion">Crate Potion</label>
+					</div>
+					<div>
+						<input type="checkbox" id="tipsy" onchange="updateAllText()">
+						<label for="tipsy">Tipsy</label>
+					</div>
+					<div>
+						<input type="checkbox" id="gummy_worm" onchange="updateAllText()">
+						<label for="gummy_worm">Gummy Worm</label>
+					</div>
+					<div>
+						<input type="checkbox" id="toilet" onchange="updateAllText()">
+						<label for="toilet">Sitting on Toilet</label>
+					</div>
+				</fieldset>
+				
+				<fieldset> <!-- Environment -->
+					<legend>Environment</legend>
+					<div>
+						<label for="moon_phase">Moon Phase: </label>
+						<select id="moon_phase" onchange="updateAllText()" required>
+							<option value="full" selected>Full Moon</option>
+							<option value="gibbous">Waning Gibbous</option>
+							<option value="quarter">Third Quarter</option>
+							<option value="crescent">Waning Crescent</option>
+							<option value="new">New Moon</option>
+							<option value="crescent">Waxing Crescent</option>
+							<option value="quarter">First Quarter</option>
+							<option value="gibbous">Waxing Gibbous</option>
+						</select>
+					</div>
+					<div>
+						<label for="daytime">Time of day: </label>
+						<select id="daytime" onchange="updateAllText()" required>
+							<option value="neutral" selected>N/A</option>
+							<option value="positive">4:30 AM - 6:00 AM</option>
+							<option value="negative">9:00 AM - 3:00 PM</option>
+							<option value="positive">6:00 PM - 7:30 PM</option>
+							<option value="negative">9:18 PM - 2:42 AM</option>
+						</select>
+					</div>
+					<div>
+						<input type="checkbox" id="cloudy" onchange="updateAllText()">
+						<label for="cloudy">Cloudy or Overcast</label>
+					</div>
+					<div>
+						<input type="checkbox" id="rainy" onchange="updateAllText()">
+						<label for="rainy">Rain</label>
+					</div>
+				</fieldset>
 
-			<fieldset>
-				<!-- Change this text instead of fast_lava_text? -->
-				<legend>Lava fishing</legend>
-				<div>
-					<input type="checkbox" id="lava_bait" onchange="updateLavaFishingText()">
-					<label for="lava_bait">Using Lava bait</label>
-				</div>
-				<div>
-					<input type="checkbox" id="lava_rod" onchange="updateLavaFishingText()">
-					<label for="lava_rod">Using Lava-capable rod</label>
-				</div>
-				<div>
-					<input type="checkbox" id="lava_hook" onchange="updateLavaFishingText()">
-					<label id="lava_hook_label" for="lava_hook">Using Lava fishing accessory</label>
-				</div>
-				<div id="fast_lava_text"></div>
-			</fieldset>
+				<fieldset> <!-- Lava fishing -->
+					<legend>Lava fishing</legend>
+					<div>
+						<input type="checkbox" id="lava_bait" onchange="updateAllText()">
+						<label for="lava_bait">Using Lava bait</label>
+					</div>
+					<div>
+						<input type="checkbox" id="lava_rod" onchange="updateAllText()">
+						<label for="lava_rod">Using Lava-capable rod</label>
+					</div>
+					<div>
+						<input type="checkbox" id="lava_hook" onchange="updateAllText()">
+						<label id="lava_hook_label" for="lava_hook">Using Lava fishing accessory</label>
+					</div>
+				</fieldset>
+			</div>
+			<div> <!-- Stats display -->
+				<fieldset>
+					<legend>Stats</legend>
+					<div id="fishing_power"></div>
+					<div id="crate_chance"></div>
+					<div id="fast_lava_text"></div>
+					<div id="junk_text"></div>
+				</fieldset>
+				<fieldset>
+					<legend>Catch rate</legend>
+					<!--<div>Slowest:</div>-->
+					<div id="catch_rate" style="width: 26ch;"></div>
+					<!--<div>Fastest:</div>-->
+				</fieldset>
+				<fieldset>
+					<legend>Quality success rate</legend>
+					<div>Plentiful: <b>100%</b></div>
+					<div id="rate_common"></div>
+					<div id="rate_uncommon"></div>
+					<div id="rate_rare"></div>
+					<div id="rate_epic"></div>
+					<div id="rate_legendary"></div>
+				</fieldset>
+			</div>
+			<div>
+				<fieldset> <!-- Conditions -->
+					<legend>Conditions</legend>
+					<div>
+						<label for="biome" style="padding-right: 4ch;">Biome:</label>
+						<select id="biome" onchange="updateDropTable()">
+							<option selected value="pure">Pure</option>
+							<option value="desert">Desert</option>
+							<option value="snow">Snow</option>
+							<option value="jungle">Jungle</option>
+							<option value="ocean">Ocean</option>
+							<option value="dungeon">Dungeon</option>
+						</select>
+					</div>
+					<div>
+						<label for="infection">Infection:</label>
+						<select id="infection" onchange="updateDropTable()">
+							<option selected value="">None</option>
+							<option value="corruption">Corruption</option>
+							<option value="crimson">Crimson</option>
+							<option value="hallow">Hallow</option>
+						</select>
+					</div>
+					<div>
+						<label for="height" style="padding-right: 3ch;">Height:</label>
+						<select id="height" onchange="updateDropTable()">
+							<option selected value="surface">Surface</option>
+							<option value="underground">Underground</option>
+							<option value="caverns">Caverns</option>
+							<option value="sky">Sky</option>
+						</select>
+					</div>
+					<div>
+						<input type="checkbox" id="hardmode" onchange="updateBloodMoonTable(); updateDropTable()">
+						<label for="hardmode">Hardmode</label>
+					</div>
+					<div>
+						<input type="checkbox" id="blood_moon" onchange="updateBloodMoonTable()">
+						<label for="blood_moon">Blood Moon</label>
+					</div>
+				</fieldset>
+				<table id="drop_table" style="margin-top: 10px;"> <!-- Drop tables -->
+					<tr>
+						<th>Quality</th>
+						<th>Items</th>
+						<th style="width: 15ch;">Crates</th>
+					</tr>
+					<tr>
+						<td>Plentiful</td>
+						<td id="catch_plentiful"></td>
+						<td id="crate_plentiful"></td>
+					</tr>
+					<tr>
+						<td>Common</td>
+						<td id="catch_common"></td>
+						<td id="crate_common"></td>
+					</tr>
+					<tr>
+						<td>Uncommon</td>
+						<td id="catch_uncommon"></td>
+						<td id="crate_uncommon"></td>
+					</tr>
+					<tr>
+						<td>Rare</td>
+						<td id="catch_rare"></td>
+						<td id="crate_rare"></td>
+					</tr>
+					<tr>
+						<td>Very Rare</td>
+						<td id="catch_epic"></td>
+						<td id="crate_epic"></td>
+					</tr>
+					<tr>
+						<td>Legendary</td>
+						<td id="catch_legendary"></td>
+						<td id="crate_legendary"></td>
+					</tr>
+				</table>
+				<table id="table_blood_moon" style="display: none;">
+					<caption>
+						<i>Italicized</i> items are once per world.<br>
+						Enemy catch rates are doubled when using the Chum Caster.
+					</caption>
+					<tr>
+						<th>Chance</th>
+						<th>Catches</th>
+					</tr>
+					<tr>
+						<td>20%</td>
+						<td><i>Surly Slime</i></td>
+					</tr>
+					<tr>
+						<td>16%</td>
+						<td>
+							Blood Moon enemy fish
+						</td>
+					</tr>
+					<tr id="dreadnautilus" style="display: none;">
+						<td>10%</td>
+						<td>Dreadnautilus</td>
+					</tr>
+					<tr>
+						<td id="blood_moon_legendary"></td>
+						<td>
+							<i>Advanced Combat Techniques</i><br>
+							Dread of the Red Sea
+						</td>
+					</tr>
+				</table>
+			</div>
 		</div>
-		<div style="float: right; text-align: left;">
-			<label for="fishing_power">Fishing power: </label>
-			<div id="fishing_power"></div>
-		</div>
-		<script src="../fishing.js"></script>
-		<script>
-			updateFishingPowerText();
-			updateLavaFishingText();
-		</script>
 	</body>
 </html>
