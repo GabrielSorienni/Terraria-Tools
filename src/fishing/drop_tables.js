@@ -780,6 +780,32 @@ export const HeightTables =
 
 	"underground":
 	{
+		"pure":
+		{
+			items:
+			{
+				pre_hardmode:
+				{
+					plentiful: [],
+					common:[],
+					uncommon: ["Armored Cavefish"],
+					rare: [],
+					epic: [],
+					legendary: ["Golden Carp"]
+				},
+
+				hardmode:
+				{
+					plentiful: [],
+					common: [],
+					uncommon: [],
+					rare: [],
+					epic: [],
+					legendary: []
+				}
+			}
+		},
+
 		"jellyfish":
 		{
 			items:

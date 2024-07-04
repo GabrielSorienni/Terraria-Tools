@@ -1,47 +1,25 @@
 body
 {
+	padding-top: 26px;
 	background-color: #000000;
 	color: #ffffff;
 	font-family: 'Lucida', monospace;
 }
 
-div#sidebar
+div#header
 {
-	height: 100%;
-	width: 0;
-	padding-top: 60px;
-	
+	display: flex;
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 1;
-	
-	background-color: #180425;
-	overflow-x: hidden;
-	transition: 0.3s;
-	white-space: nowrap;
+	width: 100%;
+	background: #777777;
+	gap: 1ch;
 }
 
-div#sidebar a
+div#header a
 {
-	padding: 8px 8px 8px 32px;
 	text-decoration: none;
-	font-size: 25px;
-	color: #777777;
-	display: block;
-	transition: 0.3s;
-}
-
-div#sidebar a:hover
-{
-	color: #f1f1f1;
-}
-
-div#sidebar .closebutton
-{
-	position: absolute;
-	top: 0;
-	font-size: 25px;
 }
 
 span

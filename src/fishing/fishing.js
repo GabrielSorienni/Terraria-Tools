@@ -1,35 +1,36 @@
-import { BiomeTables, FishingDropTables, HeightTables, InfectionTables } from "./Fishing/Drop Tables/drop_tables.js";
+import { BiomeTables, FishingDropTables, HeightTables, InfectionTables } from "./drop_tables.js";
 
 // #region Document elements
-var rod_power = document.getElementById("rod_power");
-var bait_power = document.getElementById("bait_power");
-var liquid = document.getElementById("liquid");
-var lake_size = document.getElementById("lake_size");
-var chum_bucket = document.getElementById("chum_bucket");
-
-var fishing_potion = document.getElementById("fishing_potion");
-var tipsy = document.getElementById("tipsy");
-var gummy_worm = document.getElementById("gummy_worm");
-var toilet = document.getElementById("toilet");
-
-var angler_hat = document.getElementById("angler_hat");
-var angler_vest = document.getElementById("angler_vest");
-var angler_pants = document.getElementById("angler_pants");
-var angler_earring = document.getElementById("angler_earring");
-var angler_tackle_bag = document.getElementById("angler_tackle_bag");
-var lavaproof_tackle_bag = document.getElementById("lavaproof_tackle_bag");
-var fishing_bobber = document.getElementById("fishing_bobber");
-var inner_tube = document.getElementById("inner_tube");
-
-var cloudy = document.getElementById("cloudy");
-var rainy = document.getElementById("rainy");
-var moon_phase = document.getElementById("moon_phase");
-var daytime = document.getElementById("daytime");
-
-var lava_bait = document.getElementById("lava_bait");
-var lava_rod = document.getElementById("lava_rod");
-var lava_hook = document.getElementById("lava_hook");
-var fast_lava_text = document.getElementById("fast_lava_text");
+var FishingFactors =
+{
+	get lake_size() { return Number(document.getElementById("lake_size").value); },
+	get liquid() { return document.getElementById("liquid").value; },
+	get rod_power() { return Number(document.getElementById("rod_power").value); },
+	get bait_power() { return Number(document.getElementById("bait_power").value); },
+	get chum_bucket() { return Number(document.getElementById("chum_bucket").value); },
+	get fishing_potion() { return document.getElementById("fishing_potion").checked; },
+	get tipsy() { return document.getElementById("tipsy").checked; },
+	get gummy_worm() { return document.getElementById("gummy_worm").checked; },
+	get toilet() { return document.getElementById("toilet").checked; },
+	get angler_hat() { return document.getElementById("angler_hat").checked; },
+	get angler_vest() { return document.getElementById("angler_vest").checked; },
+	get angler_pants() { return document.getElementById("angler_pants").checked; },
+	get angler_earring() { return document.getElementById("angler_earring").checked; },
+	get angler_tackle_bag() { return document.getElementById("angler_tackle_bag").checked; },
+	get fishing_bobber() { return document.getElementById("fishing_bobber").checked; },
+	get inner_tube() { return document.getElementById("inner_tube").checked; },
+	get cloudy() { return document.getElementById("cloudy").checked; },
+	get rainy() { return document.getElementById("rainy").checked; },
+	get lavaproof_tackle_bag() { return document.getElementById("lavaproof_tackle_bag").checked; },
+	get moon_phase() { return document.getElementById("moon_phase").value; },
+	get daytime() { return document.getElementById("daytime").value; },
+	get lava_bait() { return document.getElementById("lava_bait").checked; },
+	get lava_rod() { return document.getElementById("lava_rod").checked; },
+	get lava_hook() { return document.getElementById("lava_hook").checked; },
+	get biome() { return document.getElementById("biome").value; },
+	get infection() { return document.getElementById("infection").value; },
+	get height() { return document.getElementById("height").value; }
+}
 
 var fishing_power = document.getElementById("fishing_power");
 var catch_rate = document.getElementById("catch_rate");
@@ -62,6 +63,11 @@ function calcBiteChance()
 	return (75 + Math.min(125, fishing_power_cache)) / 200;
 }
 
+function canFish()
+{
+	return FishingFactors.lake_size >= 50 || (FishingFactors.liquid === "honey" && FishingFactors.lake_size >= 50);
+}
+
 /**
  * Calculates the catch rate down to 2 decimal points.
  * @returns {number} Catch rate in seconds per bite.
@@ -71,7 +77,7 @@ function calcAverageCatchRate()
 {
 	var catch_rate;
 
-	if (liquid.value === "lava" && hasFastLavaFishing())
+	if (FishingFactors.liquid === "lava" && hasFastLavaFishing())
 	{
 		// The Wiki did not have this formula, so I made it myself.
 		// It depends on the length of the timer, which is not consistent in Lava
@@ -99,9 +105,9 @@ function hasFastLavaFishing()
 {
 	var enabled_factors = 0;
 
-	enabled_factors += lava_bait.checked ? 1 : 0;
-	enabled_factors += lava_rod.checked ? 1 : 0;
-	enabled_factors += lava_hook.checked ? 1 : 0;
+	enabled_factors += FishingFactors.lava_bait ? 1 : 0;
+	enabled_factors += FishingFactors.lava_rod ? 1 : 0;
+	enabled_factors += FishingFactors.lava_hook ? 1 : 0;
 
 	return enabled_factors >= 2;
 }
@@ -111,7 +117,7 @@ function hasFastLavaFishing()
  */
 function getDaytimeMultiplier()
 {
-	switch (daytime.value)
+	switch (FishingFactors.daytime)
 	{
 		case "positive":
 			return 1.3;
@@ -128,7 +134,7 @@ function getDaytimeMultiplier()
  */
 function getMoonPhaseMultiplier()
 {
-	switch (moon_phase.value)
+	switch (FishingFactors.moon_phase)
 	{
 		case "full":
 			return 1.1;
@@ -148,10 +154,10 @@ function getMoonPhaseMultiplier()
  */
 function calcLakeSizeMultiplier()
 {
-	const threshold = liquid.value === "honey" ? 200 : 300;
+	const threshold = FishingFactors.liquid === "honey" ? 200 : 300;
 	// The "atmo" variable is time-consuming (on the user's end) to calculate
 	// and is often 1 anyways, so it has been excluded from this calculation.
-	var multiplier = Number(lake_size.value) / threshold;
+	var multiplier = FishingFactors.lake_size / threshold;
 
 	return Math.max(0.25, Math.min(multiplier, 1));
 }
@@ -161,13 +167,13 @@ function calcLakeSizeMultiplier()
  */
 function getChumBucketFactor()
 {
-	switch (chum_bucket.value)
+	switch (FishingFactors.chum_bucket)
 	{
-		case "0":
+		case 0:
 			return 0;
-		case "1":
+		case 1:
 			return 11;
-		case "2":
+		case 2:
 			return 17;
 		default:
 			return 20;
@@ -180,83 +186,68 @@ function getChumBucketFactor()
  */
 function calcFishingPower()
 {
-	let total = Number(rod_power.value);
-	total += Number(bait_power.value);
+	if (!canFish())
+	{
+		return fishing_power_cache = 0;
+	}
 
-	total += fishing_potion.checked ? 15 : 0;
-	total += tipsy.checked ? 5 : 0;
-	total += toilet.checked ? 5 : 0;
-	total += gummy_worm.checked ? 3 : 0;
-	total += angler_hat.checked ? 5 : 0;
-	total += angler_vest.checked ? 5 : 0;
-	total += angler_pants.checked ? 5 : 0;
-	total += angler_earring.checked ? 10 : 0;
-	total += angler_tackle_bag.checked ? 10 : 0;
-	total += lavaproof_tackle_bag.checked ? 10 : 0;
-	total += fishing_bobber.checked ? 10 : 0;
-	total += inner_tube.checked ? 5 : 0;
+	let total = FishingFactors.rod_power;
+	total += FishingFactors.bait_power;
+
+	total += FishingFactors.fishing_potion ? 15 : 0;
+	total += FishingFactors.tipsy ? 5 : 0;
+	total += FishingFactors.toilet ? 5 : 0;
+	total += FishingFactors.gummy_worm ? 3 : 0;
+	total += FishingFactors.angler_hat ? 5 : 0;
+	total += FishingFactors.angler_vest ? 5 : 0;
+	total += FishingFactors.angler_pants ? 5 : 0;
+	total += FishingFactors.angler_earring ? 10 : 0;
+	total += FishingFactors.angler_tackle_bag ? 10 : 0;
+	total += FishingFactors.lavaproof_tackle_bag ? 10 : 0;
+	total += FishingFactors.fishing_bobber ? 10 : 0;
+	total += FishingFactors.inner_tube ? 5 : 0;
 	
 	total *= getMoonPhaseMultiplier();
 	total *= getDaytimeMultiplier();
-	total *= cloudy.checked ? 1.1 : 1;
-	total *= rainy.checked ? 1.2 : 1;
+	total *= FishingFactors.cloudy ? 1.1 : 1;
+	total *= FishingFactors.rainy ? 1.2 : 1;
 	total *= calcLakeSizeMultiplier();
 
 	total += getChumBucketFactor();
 
-	fishing_power_cache = Math.round(total);
-
-	return fishing_power_cache;
+	return fishing_power_cache = Math.round(total);
 }
 
 function updateFishingPowerText()
 {
-	const numerical_lake_size = Number(lake_size.value);
-
-	if (liquid.value === "honey")
-	{
-		if (numerical_lake_size < 50)
-		{
-			fishing_power.innerHTML = "Fishing impossible - not enough honey! The lake must be at least 50 tiles large.";
-		
-			return;
-		}
-	}
-	else if (numerical_lake_size < 75)
-	{
-		fishing_power.innerHTML = "Fishing impossible - not enough " + liquid.value + "! The lake must be at least 75 tiles large.";
-
-		return;
-	}
-	
 	fishing_power.innerHTML = "Fishing Power: " + calcFishingPower().toString();
 }
 
 function updateLavaFishingText()
 {
+	var fast_lava_text = document.getElementById("fast_lava_text");
+
 	if (hasFastLavaFishing())
 	{
 		fast_lava_text.innerHTML = "Lava fishing: Fast";
+		return;
 	}
-	else
-	{
-		fast_lava_text.innerHTML = "Lava fishing: Slow";
-	}
+	
+	fast_lava_text.innerHTML = "Lava fishing: Slow";
 }
 
-function updateLavaAccessoryCheckbox()
+window.updateLavaAccessoryCheckbox = function updateLavaAccessoryCheckbox()
 {
-	var tooltip;
+	var lava_hook_element = document.getElementById("lava_hook");
 
-	if (lavaproof_tackle_bag.checked)
+	if (FishingFactors.lavaproof_tackle_bag)
 	{
-		lava_hook.checked = true;
-		lava_hook.disabled = true;
+		lava_hook_element.checked = true;
+		lava_hook_element.disabled = true;
+		return;
 	}
-	else
-	{
-		lava_hook.disabled = false;
-	}
+	
+	lava_hook_element.disabled = false;
 }
 
 function updateCatchRateText()
@@ -337,33 +328,32 @@ function generateDropTable()
 {
 	var table = new FishingDropTables();
 
-	if (liquid.value !== "water")
+	if (FishingFactors.liquid !== "water")
 	{
-		table.add(BiomeTables[liquid.value]);
+		table.add(BiomeTables[FishingFactors.liquid]);
 		return table;
 	}
 	
-	table.add(BiomeTables[biome.value]);
+	table.add(BiomeTables[FishingFactors.biome]);
 
 	// None is empty string
-	if (infection.value)
+	if (FishingFactors.infection)
 	{
-		if (biome.value === "desert" || biome.value === "ocean")
+		if (FishingFactors.biome === "desert" || FishingFactors.biome === "ocean")
 		{
-			//table = BiomeTables["pure"];
 			table = new FishingDropTables();
 			table.add(BiomeTables["pure"]);
 		}
 
-		table.add(InfectionTables[infection.value]);
+		table.add(InfectionTables[FishingFactors.infection]);
 	}
 
-	switch (height.value)
+	switch (FishingFactors.height)
 	{
 		case "caverns":
-			if (biome.value in HeightTables["caverns"])
+			if (FishingFactors.biome in HeightTables["caverns"])
 			{
-				table.add(HeightTables["caverns"][biome.value]);
+				table.add(HeightTables["caverns"][FishingFactors.biome]);
 			}
 			if (canGetJellyfish())
 			{
@@ -371,22 +361,30 @@ function generateDropTable()
 			}
 			// Fall-through
 		case "underground":
-			if (biome.value in HeightTables["underground"])
+			if (FishingFactors.biome === "ocean" && !FishingFactors.infection)
 			{
-				table.add(HeightTables["underground"][biome.value]);
+				table.add(BiomeTables["pure"]);
+			}
+			if (FishingFactors.biome in HeightTables["underground"])
+			{
+				table.add(HeightTables["underground"][FishingFactors.biome]);
+			}
+			else
+			{
+				table.add(HeightTables["underground"]["pure"]);
 			}
 			break;
 		case "sky":
-			if (biome.value === "pure" && !infection.value)
+			if (FishingFactors.biome === "pure" && !FishingFactors.infection)
 			{
 				table.add(HeightTables["sky"]["pure"]);
 				return table;
 			}
 			// Fall-through
 		case "surface":
-			if (biome.value in HeightTables["surface"] && (biome.value !== "ocean" || !infection.value))
+			if (FishingFactors.biome in HeightTables["surface"] && (FishingFactors.biome !== "ocean" || !FishingFactors.infection))
 			{
-				table.add(HeightTables["surface"][biome.value]);
+				table.add(HeightTables["surface"][FishingFactors.biome]);
 			}
 			break;
 		default:
@@ -394,7 +392,7 @@ function generateDropTable()
 	}
 
 	// Scaly Truffle requires infected Snow Cavern
-	if (biome.value === "snow" && height.value === "caverns" && infection.value)
+	if (FishingFactors.biome === "snow" && FishingFactors.height === "caverns" && FishingFactors.infection)
 	{
 		table.addScalyTruffle();
 	}
@@ -404,7 +402,7 @@ function generateDropTable()
 
 function canGetJellyfish()
 {
-	if (infection.value !== "corruption" && infection.value !== "hallow" && biome.value !== "desert")
+	if (FishingFactors.infection !== "corruption" && FishingFactors.infection !== "hallow" && FishingFactors.biome !== "desert")
 	{
 		return true;
 	}
@@ -496,6 +494,7 @@ window.updateBloodMoonTable = function updateBloodMoonTable()
 	var table_blood_moon = document.getElementById("table_blood_moon");
 	var dreadnautilus = document.getElementById("dreadnautilus");
 	var hardmode = document.getElementById("hardmode");
+	var moon_phase = document.getElementById("moon_phase");
 
 	if (blood_moon.checked)
 	{
@@ -503,7 +502,7 @@ window.updateBloodMoonTable = function updateBloodMoonTable()
 		moon_phase.disabled = true;
 		updateFishingPowerText();
 
-		if (liquid.value == "water")
+		if (FishingFactors.liquid == "water")
 		{
 			table_blood_moon.style.display = "table";
 		}
@@ -530,21 +529,21 @@ window.updateBloodMoonTable = function updateBloodMoonTable()
 
 function updateJunkText()
 {
+	// 84 * 0.60 > 50
 	if (calcLakeSizeMultiplier() === 1 || fishing_power_cache >= 84)
 	{
 		document.getElementById("junk_text").innerHTML = "Junk: Impossible";
+		return;
 	}
-	else
+	
+	// 35 * 1.40 < 50
+	if (fishing_power_cache <= 35)
 	{
-		if (fishing_power_cache <= 35)
-		{
-			document.getElementById("junk_text").innerHTML = "Junk: Guaranteed";
-		}
-		else
-		{
-			document.getElementById("junk_text").innerHTML = "Junk: Luck-dependent";
-		}
+		document.getElementById("junk_text").innerHTML = "Junk: Guaranteed";
+		return;
 	}
+	
+	document.getElementById("junk_text").innerHTML = "Junk: Luck-dependent";
 }
 
 function updateCrateText()

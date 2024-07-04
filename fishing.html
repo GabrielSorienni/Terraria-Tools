@@ -2,22 +2,21 @@
 
 <html>
 	<head>
-		<link href="../style.css" rel="stylesheet">
-		<script src="../sidebar.js"></script>
+		<link href="./style.css" rel="stylesheet">
+		<script src="./src/header.js" type="module"></script>
+		<script src="./src/fishing/fishing.js" type="module"></script>
 	</head>
 	
-	<body>
-		<script src="../fishing.js" type="module"></script>
-
-		<div id="sidebar">
-			<a href="javascript:void(0)" class="closebutton" onclick="closeSidebar()">&lAarr;</a>
-			<a href="../index.html">Home</a>
-			<a href="https://github.com/GabrielSorienni/Terraria-Tools/issues">Report issue</a>
+	<body id="body">
+		<div id="header">
+			<a href="./index.html" style="color:#FFFFFF;">Terraria Tools</a>
+			<div id="button_mode" onclick="switchMode()" title="Switch to Light Mode" style="cursor: pointer;">☀️</div>
+			<a href="./fishing.html" title="Fishing Calculator">🐟</a>
+			<a href="" title="Aether Calculator (WIP)">✨</a>
+			<a href="" title="NPC Calculator (WIP)">😊</a>
 		</div>
-		
-		<span onclick="openSidebar()">&rAarr; Terraria Tools</span>
 
-		<div style="padding-top: 25px;">
+		<div>
 			See the <a href="https://terraria.wiki.gg/wiki/Fishing">wiki</a> for more information.<br>
 			<b>Bold</b> values indicate a <i>cap</i> (i.e.: the value will not be changed with additional Fishing Power).
 		</div>

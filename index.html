@@ -3,23 +3,24 @@
 <html>
 	<head>
 		<link href="style.css" rel="stylesheet">
+		<script src="./src/header.js" type="module"></script>
 	</head>
 
-	<body>
-		<script src="./sidebar.js"></script>
-
-		<div id="sidebar">
-			<a href="javascript:void(0)" class="closebutton" onclick="closeSidebar()">&lAarr;</a>
-			<a href="./Fishing/fishing.html">Fishing</a>
-			<a href="https://github.com/GabrielSorienni/Terraria-Tools/issues">Report issue</a>
+	<body id="body">
+		<div id="header">
+			<a href="./index.html" style="color:#FFFFFF;">Terraria Tools</a>
+			<div id="button_mode" onclick="switchMode()" title="Switch to Light Mode" style="cursor: pointer;">☀️</div>
+			<a href="./fishing.html" title="Fishing Calculator">🐟</a>
+			<a href="" title="Aether Calculator (WIP)">✨</a>
+			<a href="" title="NPC Calculator (WIP)">😊</a>
 		</div>
 
-		<span onclick="openSidebar()">&rAarr; Terraria Tools</span>
+		<div>
+			Click the icons above to start using tools.
 
-		<div style="padding-top: 25px;">
 			<h3>Current features</h3>
 			<ul>
-				<li><a href="./Fishing/fishing.html">Fishing Calculator</a></li>
+				<li>Fishing Calculator</li>
 			</ul>
 			<h3>Planned features</h3>
 			<ul>
